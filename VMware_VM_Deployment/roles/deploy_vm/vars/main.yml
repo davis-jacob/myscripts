@@ -1,0 +1,51 @@
+---
+#vCenter information for deploying VMs
+datacenter: CaaSonVMaaS
+template: ecp-template
+folder: selinux-refpolicy-vms
+cluster: CaaS
+datastore: CaaSonVMaaS
+
+## Networking Details
+netmask: 255.0.0.0
+gateway: 20.1.1.1
+dns1: 20.0.1.254
+domain: twentynet.local
+Network_Label: TwentyNet
+
+#### Controller  and Master VMs Details
+
+vm_ctrl:
+  vm1:
+     VMname: test1
+     ip1: 20.0.17.178
+  vm2:
+     VMname: test2
+     ip1: 20.0.17.177      
+
+
+### Worker VM Details
+
+worker_disk_size: 500     #### Number of disks is fixed at 6  
+
+vm_wrk:
+  vm1:      
+     VMname: test3
+     ip1: 20.0.17.176
+
+  vm2:
+     VMname: test4
+     ip1: 20.0.17.175
+
+########## Load Balancer VM details
+domain_lb: customer.hpe.net
+
+
+vm_lb:
+  vm1:
+     VMname: test5
+     ip1: 20.0.17.174
+  vm2:
+     VMname: test6
+     ip1: 20.0.17.173
+

@@ -1,0 +1,8 @@
+[vcenter]
+vcsa.caas.twentynet.local
+
+[workers]
+
+[masters]
+
+[gateway]

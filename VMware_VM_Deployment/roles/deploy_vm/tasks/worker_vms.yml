@@ -1,0 +1,58 @@
+###
+## Copyright (2019) Hewlett Packard Enterprise Development LP
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## You may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+## http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+####
+---
+- name:  Clone Worker VMs  from template and customize
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    datacenter: "{{ datacenter }}"
+    name: "{{ item.value.VMname }}"
+    state: poweredon
+    folder: "{{ folder }}"
+    template: "{{ template }}"
+    cluster: "{{ cluster }}"
+    customization:
+            domain: "{{ domain }}"
+            dns_servers: "{{ dns1 }}"
+            hostname: "{{ item.value.VMname }}"
+    networks:
+          - name: "{{ Network_Label }}"
+            type: static
+            #start_connected: yes
+            ip: "{{ item.value.ip1 }}"
+            netmask: "{{ netmask }}"
+            gateway: "{{ gateway }}"
+            dns_servers: "{{ dns1 }}"
+            domain: "{{ domain }}"
+            #        allow_guest_control: yes
+            #with_sequence: start=1 end=6 
+    wait_for_customization: yes
+    wait_for_ip_address: yes
+    #    disk: 
+    #    - state: present
+    #       scsi_controller: 3
+    #       scsi_type: paravirtual
+    #       size_gb: 600
+    #       type: thin
+    #       unit_number: 15
+    #       datastore: "{{ datastore }}"
+
+  with_dict:
+          - "{{ vm_wrk }}"  
+  
+  delegate_to: localhost

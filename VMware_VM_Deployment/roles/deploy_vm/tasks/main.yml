@@ -1,0 +1,14 @@
+---
+#Task for createing VMs 
+
+- name: Create Controller and Master VMs
+  include_tasks: master.yml
+
+- name: Create Worker Node VMs
+  include_tasks: worker_vms.yml 
+
+- name: Create Load Balancer VMs
+  include_tasks: load_balancer_vms.yml
+
+- name: Task to add disks to worker nodes
+  include_tasks: add_disks.yml
